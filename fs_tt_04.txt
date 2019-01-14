@@ -1,0 +1,47 @@
+#version 330 core
+
+in vec3 fragPos;
+in vec3 ourNormal;
+in vec2 ourTexCoord;
+
+out vec4 fragColor;
+
+uniform sampler2D first_texture;
+uniform vec3 viewPos;
+
+struct WorldLight {
+  vec3 direction;
+  vec3 ambient;
+  vec3 diffuse;
+  vec3 specular;
+};
+
+uniform WorldLight worldLight;  
+
+struct Material {
+  vec3 diffuse;
+  vec3 specular;
+  float shininess;
+}; 
+  
+uniform Material material;
+
+void main() {
+  // ambient
+  vec3 ambient = worldLight.ambient * texture(first_texture, ourTexCoord).rgb * 20f;
+  
+  // diffuse
+  vec3 norm = normalize(ourNormal);
+  vec3 worldLightDir = normalize(-worldLight.direction);  
+  float diff = max(dot(norm, worldLightDir), 0.0);
+  vec3 diffuse = worldLight.diffuse  * (diff * material.diffuse) * texture(first_texture, ourTexCoord).rgb * 20f;
+  
+  // specular 
+  vec3 viewDir = normalize(viewPos - fragPos);
+  vec3 reflectDir = reflect(-worldLightDir, norm);  
+  float spec = pow(max(dot(viewDir, reflectDir), 0.0), material.shininess);
+  vec3 specular = worldLight.specular * (spec * material.specular);
+
+  vec3 result = ambient + diffuse + specular;
+  fragColor = vec4(result, 1.0);
+}

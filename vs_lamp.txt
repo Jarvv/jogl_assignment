@@ -1,0 +1,23 @@
+#version 330 core
+
+layout (location = 0) in vec3 position;
+layout (location = 1) in vec3 normal;
+layout (location = 2) in vec2 texCoord;
+
+out vec3 fragPos;
+out vec3 ourNormal;
+out vec2 ourTexCoord;
+
+uniform mat4 model;
+uniform mat4 mvpMatrix;
+
+void main() {
+  gl_Position = mvpMatrix * vec4(position, 1.0);
+  fragPos = vec3(model*vec4(position, 1.0f));
+  mat4 normalMatrix = transpose(inverse(model));
+  vec3 norm = normalize(normal);
+  ourNormal = mat3(normalMatrix) * norm;
+
+  //ourNormal = vec3((normalMatrix) * vec4(normal,1.0));  
+  ourTexCoord = texCoord;
+}
