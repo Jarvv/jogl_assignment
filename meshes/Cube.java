@@ -3,24 +3,19 @@ import java.nio.*;
 import com.jogamp.common.nio.*;
 import com.jogamp.opengl.*;
 
-/* I declare that this code is my own work 
-    Author James Harvey jharvey3@sheffield.ac.uk*/
-public class Ring extends Mesh {
+package meshes;
 
-  private int[] textureId1; 
-  private int[] textureId2;
+public class Cube extends Mesh {
 
-  public Ring(GL3 gl, int[] textureId1, int[] textureId2) {
+  public Cube(GL3 gl) {
     super(gl);
     super.vertices = this.vertices;
     super.indices = this.indices;
-    this.textureId1 = textureId1;
-    this.textureId2 = textureId2;
-    material.setAmbient(0.8f, 0.8f, 0.8f);
-    material.setDiffuse(0.8f, 0.8f, 0.8f);
-    material.setSpecular(1f, 1f, 1f);
-    material.setShininess(64.0f);
-    shader = new Shader(gl, "vs_multiLight.txt", "fs_multiLight.txt");
+    material.setAmbient(0.5f, 0.5f, 0.5f);
+    material.setDiffuse(0.5f, 0.5f, 0.5f);
+    material.setSpecular(0.5f, 0.5f, 0.5f);
+    material.setShininess(32.0f);
+    shader = new Shader(gl, "./shaders/vs_lamp.txt", "./shaders/fs_lamp.txt");
     fillBuffers(gl);
   }
   
@@ -34,19 +29,11 @@ public class Ring extends Mesh {
     shader.setVec3(gl, "viewPos", camera.getPosition());
 
     worldLight.applyToShader(shader, gl);
-    lampLight.applyToShader(shader, gl);
-    spotLight.applyToShader(shader, gl);
 
+    shader.setVec3(gl, "material.ambient", material.getAmbient());
+    shader.setVec3(gl, "material.diffuse", material.getDiffuse());
     shader.setVec3(gl, "material.specular", material.getSpecular());
     shader.setFloat(gl, "material.shininess", material.getShininess());
-
-    shader.setInt(gl, "material.diffuse", 0);  // be careful to match these with GL_TEXTURE0 and GL_TEXTURE1
-    shader.setInt(gl, "material.specular", 1);
-
-    gl.glActiveTexture(GL.GL_TEXTURE0);
-    gl.glBindTexture(GL.GL_TEXTURE_2D, textureId1[0]);
-    gl.glActiveTexture(GL.GL_TEXTURE1);
-    gl.glBindTexture(GL.GL_TEXTURE_2D, textureId2[0]);
     
     gl.glBindVertexArray(vertexArrayId[0]);
     gl.glDrawElements(GL.GL_TRIANGLES, indices.length, GL.GL_UNSIGNED_INT, 0);
@@ -55,8 +42,6 @@ public class Ring extends Mesh {
   
   public void dispose(GL3 gl) {
     super.dispose(gl);
-    gl.glDeleteBuffers(1, textureId1, 0);
-    gl.glDeleteBuffers(1, textureId2, 0);
   }
   
   // ***************************************************

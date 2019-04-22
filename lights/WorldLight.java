@@ -3,6 +3,8 @@ import java.nio.*;
 import com.jogamp.common.nio.*;
 import com.jogamp.opengl.*;
 
+package lights;
+
 /* I declare that this code is my own work 
     Author James Harvey jharvey3@sheffield.ac.uk*/
 public class WorldLight extends Light{

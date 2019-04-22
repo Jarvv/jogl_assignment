@@ -6,6 +6,7 @@ import com.jogamp.opengl.*;
 import com.jogamp.opengl.util.*;
 import com.jogamp.opengl.util.awt.*;
 import com.jogamp.opengl.util.glsl.*;
+import meshes.*;
 
 /* I declare that this code is my own work 
     Author James Harvey jharvey3@sheffield.ac.uk*/

@@ -2,6 +2,11 @@ import gmaths.*;
 import java.nio.*;
 import com.jogamp.common.nio.*;
 import com.jogamp.opengl.*;
+import lights.LampLight;
+import lights.WorldLight;
+import lights.SpotLight;
+
+package meshes;
 
 /* I declare that this code is my own work 
     Author James Harvey jharvey3@sheffield.ac.uk*/
@@ -20,7 +25,7 @@ public class Room extends Mesh {
     material.setDiffuse(0.5f, 0.5f, 0.5f);
     material.setSpecular(1f, 1f, 1f);
     material.setShininess(32.0f);
-    shader = new Shader(gl, "vs_multiLight.txt", "fs_multiLight.txt");
+    shader = new Shader(gl, "./shaders/vs_multiLight.txt", "./shaders/fs_multiLight.txt");
     fillBuffers(gl);
   }
   

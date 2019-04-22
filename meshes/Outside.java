@@ -2,6 +2,9 @@ import gmaths.*;
 import java.nio.*;
 import com.jogamp.common.nio.*;
 import com.jogamp.opengl.*;
+import lights.WorldLight;
+
+package meshes;
 
 /* I declare that this code is my own work 
     Author James Harvey jharvey3@sheffield.ac.uk*/
@@ -22,7 +25,7 @@ public class Outside extends Mesh {
     material.setDiffuse(0.1f, 0.5f, 0.81f);
     material.setSpecular(0.3f, 0.3f, 0.3f);
     material.setShininess(8.0f);
-    shader = new Shader(gl, "vs_tt_04.txt", "fs_tt_04.txt");
+    shader = new Shader(gl, "./shaders/vs_tt_04.txt", "./shaders/fs_tt_04.txt");
     fillBuffers(gl);
   }
 

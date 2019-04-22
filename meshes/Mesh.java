@@ -2,6 +2,11 @@ import gmaths.*;
 import java.nio.*;
 import com.jogamp.common.nio.*;
 import com.jogamp.opengl.*;
+import lights.LampLight;
+import lights.WorldLight;
+import lights.SpotLight;
+
+package meshes;
 
 /* Using the Mesh class from previous examples, it has been extended
 to include the various light classes when a mesh gets created. This allows

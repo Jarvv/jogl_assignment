@@ -3,6 +3,8 @@ import java.nio.*;
 import com.jogamp.common.nio.*;
 import com.jogamp.opengl.*;
 
+package meshes;
+
 /* I declare that this code is my own work 
     Author James Harvey jharvey3@sheffield.ac.uk*/
 public class DiffuseHand extends Mesh {
@@ -18,7 +20,7 @@ public class DiffuseHand extends Mesh {
     material.setDiffuse(0.5f, 0.5f, 0.5f);
     material.setSpecular(0.2f, 0.2f, 0.2f);
     material.setShininess(32.0f);
-    shader = new Shader(gl, "vs_multiLight.txt", "fs_multiLight.txt");
+    shader = new Shader(gl, "./shaders/vs_multiLight.txt", "./shaders/fs_multiLight.txt");
     fillBuffers(gl);
   }
   

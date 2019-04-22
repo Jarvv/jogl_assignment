@@ -4,6 +4,8 @@ import com.jogamp.common.nio.*;
 import com.jogamp.opengl.*;
 import com.sun.javafx.geom.Vec3d;
 
+package lights;
+
 /* I declare that this code is my own work 
     Author James Harvey jharvey3@sheffield.ac.uk*/
 public class SpotLight extends Light{
